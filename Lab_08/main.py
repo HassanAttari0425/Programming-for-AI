@@ -3,7 +3,7 @@ import requests # type: ignore
 
 app = Flask(__name__)
 
-NASA_API_KEY = "4nLgHaD70SbVxeghCfczPHG2G9U2hT0ld56TiKES"
+NASA_API_KEY = "this is my api key"
 #Endpoints
 apod_url = "https://api.nasa.gov/planetary/apod"
 
