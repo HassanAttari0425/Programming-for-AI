@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA APOD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">{{ apod.title }}</h1>
+        <p id="date"><strong>Date:</strong> {{ apod.date }}</p>
+        <p id="description">{{ apod.explanation }}</p>
+
+        <div class="media">
+            {% if apod.media_type == "image" %}
+                <img id="apodImage" src="{{ apod.url }}" alt="NASA APOD Image">
+            {% elif apod.media_type == "video" %}
+                <iframe id="apodVideo" width="600" height="350" src="{{ apod.url }}" frameborder="0" allowfullscreen></iframe>
+            {% endif %}
+        </div>
+
+        <button id="changeTheme">Toggle Dark Mode</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
