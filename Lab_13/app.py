@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import openai
 
-openai.api_key = "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"
+openai.api_key = "my-api-key"
 openai.api_base = "https://openrouter.ai/api/v1"
 model_name = "deepseek/deepseek-r1:free"
 
