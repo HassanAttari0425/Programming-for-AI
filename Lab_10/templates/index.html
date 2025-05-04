@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+        #chatbox { width: 100%; max-width: 600px; margin: auto; background: white; padding: 10px; border-radius: 8px; }
+        .message { margin: 10px 0; }
+        .user { text-align: right; }
+        .bot { text-align: left; }
+        input[type="text"] { width: 80%; padding: 10px; }
+        button { padding: 10px; }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <h2>Library Assistant Chatbot</h2>
+        <div id="messages"></div>
+        <input type="text" id="userInput" placeholder="Ask me something...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById("userInput");
+            const userText = input.value.trim();
+            if (!userText) return;
+
+            const messages = document.getElementById("messages");
+            messages.innerHTML += `<div class='message user'><strong>You:</strong> ${userText}</div>`;
+            input.value = "";
+
+            fetch("/get", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `msg=${encodeURIComponent(userText)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                messages.innerHTML += `<div class='message bot'><strong>Bot:</strong> ${data.response}</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            });
+        }
+    </script>
+</body>
+</html>
